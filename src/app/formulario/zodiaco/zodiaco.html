@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signo Zodiacal</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-md-6">
+                <h2>Datos Personales</h2>
+                <form>
+                    <div class="form-group pt-2">
+                        <label>Nombre</label>
+                        <input [(ngModel)]='nombre' type="text" name="nombre" placeholder="Escribe Tu Nombre"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group pt-2">
+                        <label>Apaterno</label>
+                        <input [(ngModel)]='apaterno' type="text" name="paterno" placeholder="Escribe Tu Apellido"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group pt-2">
+                        <label>Amaterno</label>
+                        <input [(ngModel)]='amaterno' type="text" name="materno" placeholder="Escribe Tu Apellido"
+                            class="form-control">
+                    </div>
+
+                    <br>
+
+                    <div class="form-group pt-2">
+                        <label>Fecha de nacimiento</label>
+                    </div>
+
+                    <div class="form-group pt-2">
+                        <label>Día</label>
+                        <input [(ngModel)]='dia' type="number" name="dia">
+
+                        <label>Mes</label>
+                        <input [(ngModel)]='mes' type="number" name="mes">
+
+
+                        <label>Año</label>
+                        <input [(ngModel)]='anio' type="number" name="anio">
+                    </div>
+
+                    <br>
+
+                    <div class="form-group pt-2">
+                        <label>Sexo</label>
+                    </div>
+                    <div class="form-group pt-2">
+                        <input [(ngModel)]='sexo' type="radio" name="sexo" value="Masculino">
+                        <label>Masculino</label>
+                    </div>
+                    <div class="form-group pt-2">
+                        <input [(ngModel)]='sexo' type="radio" name="sexo" value="Femenino">
+                        <label>Femenino</label>
+                    </div>
+
+                    <br>
+
+                    <button (click)="calcular()" type="button">
+                        Imprimir
+                    </button>
+                </form>
+
+                <hr>
+
+                <h3>Información</h3>
+                <div class="col-md-6">
+                    <p>Nombre: {{nMostrar}} {{ApMostrar}} {{AmMostrar}}</p>
+                    <p>Fecha de nacimiento:{{diaMostrar}}/{{mesMostrar}}/{{anioMostrar}} </p>
+                    <p>Edad: {{edad}}</p>
+                    <p>Sexo: {{sexoMostrar}}</p>
+                    <p>Signo zodiacal: {{signo}}</p>
+                    <img [src]="imagen" [style.width.px]="imageWidth" [style.margin.px]="imageMargin">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
