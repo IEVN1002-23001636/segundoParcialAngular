@@ -35,6 +35,13 @@ export class ListaAlumnos implements OnInit {
       materia: new FormControl('')
     });
 
+     
   }
 
+   muestraAlumnos():void{
+      this.nuevoAlumno.matricula=this.formulario.value.matricula  
+      this.nuevoAlumno.nombre=this.formulario.value.nombre 
+      this.nuevoAlumno.correo=this.formulario.value.correo  
+      this.nuevoAlumno.materia=this.formulario.value.materia 
+      }
 }
