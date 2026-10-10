@@ -1,0 +1,84 @@
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
+
+  <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">
+    Cinépolis
+  </h1>
+
+  <form [formGroup]="formulario" (ngSubmit)="procesar()">
+
+    <div class="mb-5">
+      <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900">
+        Nombre del comprador
+      </label>
+
+      <input type="text" id="nombre" formControlName="nombre" placeholder="Introduce tu nombre"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div class="mb-5">
+      <label for="compradores" class="block mb-2 text-sm font-medium text-gray-900">
+        Cantidad de compradores
+      </label>
+
+      <input type="number" id="compradores" formControlName="cantCompradores" min="1"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div class="mb-5">
+      <label class="block mb-3 text-sm font-medium text-gray-900">
+        ¿Cuenta con tarjeta Cineco?
+      </label>
+
+      <div class="flex items-center gap-5">
+        <label class="flex items-center gap-2">
+          <input type="radio" formControlName="tarjCineco" value="Si" class="w-4 h-4 text-blue-600 border-gray-300" />
+          Sí
+        </label>
+
+        <label class="flex items-center gap-2">
+          <input type="radio" formControlName="tarjCineco" value="No" class="w-4 h-4 text-blue-600 border-gray-300" />
+          No
+        </label>
+      </div>
+    </div>
+
+    <div class="mb-5">
+      <label for="boletas" class="block mb-2 text-sm font-medium text-gray-900">
+        Cantidad de boletos
+      </label>
+
+      <input type="number" id="boletas" formControlName="cantBoletas" min="1"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div class="mb-5">
+      <label for="total" class="block mb-2 text-sm font-medium text-gray-900">
+        Valor a pagar
+      </label>
+
+      <input type="text" id="total" [value]="pagar | currency:'MXN':'symbol-narrow':'1.0-2'" readonly
+        class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    </div>
+
+    <div class="flex justify-center gap-4 mt-6">
+      <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+        Pagar
+      </button>
+
+      <button type="button"
+        class="text-gray-900 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
+        Salir
+      </button>
+    </div>
+
+    <p *ngIf="error" class="mt-4 text-sm text-red-600 text-center">
+      {{ error }}
+    </p>
+
+  </form>
+  <h1 class="text-xl font-bold mt-6 mb-2">Lista Clientes</h1>
+  <h2>Nombre: {{ clientes.nombre }}</h2>
+  <h2>Boletos: {{ clientes.cantidad }}</h2>
+  <h2>pagar:$ {{pagar}}</h2>
+</div>
