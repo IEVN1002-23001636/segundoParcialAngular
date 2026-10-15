@@ -66,10 +66,14 @@
         Pagar
       </button>
 
-      <button type="button"
-        class="text-gray-900 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
-        Salir
-      </button>
+      
+<button type="button"
+  [routerLink]="['/escuela/ver-registro']"
+  class="text-gray-900 bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
+  Ver
+</button>
+
+      
     </div>
 
     <p *ngIf="error" class="mt-4 text-sm text-red-600 text-center">

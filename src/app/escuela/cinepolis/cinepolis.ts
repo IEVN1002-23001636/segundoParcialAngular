@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+
+interface ICliente {
+  nombre: string;
+  compradores: number;
+  tarjeta: string;
+  boletos: number;
+  pago: number;
+}
 
 @Component({
   selector: 'app-cinepolis',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cinepolis.html',
 })
 export class Cinepolis {
@@ -24,7 +33,7 @@ export class Cinepolis {
   pagar = 0;
   error = '';
 
-  procesar() {
+  procesar(): void {
     this.error = '';
     this.pagar = 0;
 
@@ -33,35 +42,65 @@ export class Cinepolis {
       return;
     }
 
-    let compradores = Number(this.formulario.value.cantCompradores);
-    let boletas = Number(this.formulario.value.cantBoletas);
+    const datos = this.formulario.getRawValue();
 
-    if (compradores <= 0 || boletas <= 0) {
-      this.error = 'Las cantidades deben ser mayores a 0.';
+    const nombre = datos.nombre?.trim() ?? '';
+    const compradores = Number(datos.cantCompradores);
+    const boletos = Number(datos.cantBoletas);
+    const tarjeta = datos.tarjCineco ?? 'No';
+
+    if (!nombre) {
+      this.error = 'Ingresa el nombre del comprador.';
       return;
     }
 
-    if (boletas > compradores * 7) {
+    if (
+      !Number.isInteger(compradores) ||
+      !Number.isInteger(boletos) ||
+      compradores <= 0 ||
+      boletos <= 0
+    ) {
+      this.error = 'Las cantidades deben ser números enteros mayores a 0.';
+      return;
+    }
+
+    if (boletos > compradores * 7) {
       this.error = 'Máximo 7 boletas por persona.';
       return;
     }
 
-    let total = boletas * 12;
+    let total = boletos * 12;
 
-    if (boletas > 5) {
+    if (boletos > 5) {
       total = total * 0.85;
-    } else if (boletas >= 3) {
+    } else if (boletos >= 3) {
       total = total * 0.90;
     }
 
-    if (this.formulario.value.tarjCineco == 'Si') {
+    if (tarjeta === 'Si') {
       total = total * 0.90;
     }
 
-    this.pagar = total;
+    this.pagar = Number(total.toFixed(2));
 
-    this.clientes.nombre = this.formulario.value.nombre;
-    this.clientes.cantidad = String(boletas);
+    this.clientes.nombre = nombre;
+    this.clientes.cantidad = String(boletos);
+
+    const nuevoCliente: ICliente = {
+      nombre: nombre,
+      compradores: compradores,
+      tarjeta: tarjeta,
+      boletos: boletos,
+      pago: this.pagar
+    };
+
+    const datosGuardados = localStorage.getItem('cliente');
+    const lista: ICliente[] = datosGuardados
+      ? JSON.parse(datosGuardados)
+      : [];
+
+    lista.push(nuevoCliente);
+
+    localStorage.setItem('cliente', JSON.stringify(lista));
   }
-
 }

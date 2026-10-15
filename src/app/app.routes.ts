@@ -20,7 +20,6 @@ export const routes: Routes = [
       }
     ]
   },
-
   {
     path: 'escuela',
     children: [
@@ -32,14 +31,22 @@ export const routes: Routes = [
           )
       },
       {
-         path: 'cinepolis',
+        path: 'cinepolis',
         loadComponent: () =>
           import('./escuela/cinepolis/cinepolis').then(
             (c) => c.Cinepolis
           )
+      },
+      {
+        path: 'ver-registro',
+        loadComponent: () =>
+          import('./escuela/ver-registro/ver-registro').then(
+            (c) => c.VerRegistro
+          )
       }
     ]
   },
+
 
   {
     path: '',
